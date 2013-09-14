@@ -298,3 +298,8 @@ class Entity implements EntityInterface {
     $this->setUp();
   }
 }
+
+/**
+ * Defines an exception thrown when a malformed entity is passed.
+ */
+class EntityMalformedException extends Exception { }

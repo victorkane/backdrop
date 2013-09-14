@@ -3893,6 +3893,15 @@ function user_cookie_delete($cookie_name) {
 }
 
 /**
+ * Implements hook_class_info().
+ */
+function user_class_info() {
+  return array(
+    'UserController' => 'user.entity.inc',
+  );
+}
+
+/**
  * Implements hook_rdf_mapping().
  */
 function user_rdf_mapping() {

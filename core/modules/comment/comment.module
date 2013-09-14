@@ -2521,3 +2521,13 @@ function comment_file_download_access($field, $entity_type, $entity) {
     return FALSE;
   }
 }
+
+/**
+ * Implements hook_class_info().
+ */
+function comment_class_info() {
+  return array(
+    'Comment' => 'comment.entity.inc',
+    'CommentStorageController' => 'comment.entity.inc',
+  );
+}

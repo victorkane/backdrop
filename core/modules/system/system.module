@@ -3891,6 +3891,26 @@ function system_archiver_info() {
 }
 
 /**
+ * Implements hook_class_info().
+ */
+function system_class_info() {
+  return array(
+    'ArchiverTar' => 'system.archiver.inc',
+    'ArchiverZip' => 'system.archiver.inc',
+    'DefaultMailSystem' => 'system.mail.inc',
+    'TestingMailSystem' => 'system.mail.inc',
+    'DrupalQueue' => 'system.queue.inc',
+    'DrupalQueueInterface' => 'system.queue.inc',
+    'DrupalReliableQueueInterface' => 'system.queue.inc',
+    'SystemQueue' => 'system.queue.inc',
+    'MemoryQueue' => 'system.queue.inc',
+    'Archive_Tar' => 'system.tar.inc',
+    'ModuleUpdater' => 'system.updater.inc',
+    'ThemeUpdater' => 'system.updater.inc',
+  );
+}
+
+/**
  * Returns HTML for a confirmation form.
  *
  * By default this does not alter the appearance of a form at all,

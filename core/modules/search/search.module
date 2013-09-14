@@ -1326,3 +1326,12 @@ function search_forms() {
   );
   return $forms;
 }
+
+/**
+ * Implements hook_class_info().
+ */
+function search_class_info() {
+  return array(
+    'SearchQuery' => 'search.extender.inc',
+  );
+}

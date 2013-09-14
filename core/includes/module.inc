@@ -445,7 +445,7 @@ function module_enable($module_list, $enable_dependencies = TRUE) {
       module_implements_reset();
       _system_update_bootstrap_status();
       // Update the registry to include it.
-      registry_update();
+      drupal_static_reset('drupal_autoload');
       // Refresh the schema to include it.
       drupal_get_schema(NULL, TRUE);
 
@@ -565,7 +565,7 @@ function module_disable($module_list, $disable_dependents = TRUE) {
     // so we can still call module hooks to get information.
     module_invoke_all('modules_disabled', $invoke_modules);
     // Update the registry to remove the newly-disabled module.
-    registry_update();
+    drupal_static_reset('drupal_autoload');
     _system_update_bootstrap_status();
   }
 }
