@@ -1,0 +1,9 @@
+name: Options
+description: Defines selection, check box and radio button widgets for text and numeric fields.
+core: 8.x
+package: Core
+version: VERSION
+dependencies:
+  - field
+files:
+  - options.test

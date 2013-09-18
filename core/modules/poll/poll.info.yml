@@ -1,0 +1,12 @@
+name: Poll
+description: Allows your site to capture votes on different topics in the form of multiple choice questions.
+core: 8.x
+package: Core
+version: VERSION
+dependencies:
+  - node
+stylesheets:
+  all:
+    poll.css: core/modules/poll/poll.css
+files:
+  - poll.test

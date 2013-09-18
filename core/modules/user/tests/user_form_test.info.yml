@@ -1,0 +1,6 @@
+name: User module form tests
+description: Support module for user form testing.
+core: 8.x
+package: Testing
+version: VERSION
+hidden: true

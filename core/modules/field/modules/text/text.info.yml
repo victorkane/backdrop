@@ -1,0 +1,11 @@
+name: Text
+description: Defines simple text field types.
+core: 8.x
+package: Core
+version: VERSION
+dependencies:
+  - field
+files:
+  - text.test
+required: true
+explanation: 'Field type(s) in use - see <a href="/admin/reports/fields">Field list</a>'

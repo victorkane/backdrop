@@ -235,7 +235,7 @@ function _block_compare($a, $b) {
   if ($status) {
     return $status;
   }
-  // Sort by region (in the order defined by theme .info file).
+  // Sort by region (in the order defined by theme .info.yml file).
   if ((!empty($a['region']) && !empty($b['region'])) && ($place = ($regions[$a['region']] - $regions[$b['region']]))) {
     return $place;
   }

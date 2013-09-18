@@ -58,10 +58,10 @@ function _registry_update() {
   $transaction = db_transaction();
   try {
     // Allow modules to manually modify the list of files before the registry
-    // parses them. The $modules array provides the .info file information, which
-    // includes the list of files registered to each module. Any files in the
-    // list can then be added to the list of files that the registry will parse,
-    // or modify attributes of a file.
+    // parses them. The $modules array provides the .info.yml file information,
+    // which includes the list of files registered to each module. Any files in
+    // the list can then be added to the list of files that the registry will
+    // parse, or modify attributes of a file.
     drupal_alter('registry_files', $files, $modules);
     foreach (registry_get_parsed_files() as $filename => $file) {
       // Add the hash for those files we have already parsed.

@@ -1,0 +1,10 @@
+name: Dashboard
+description: Provides a dashboard page in the administrative interface for organizing administrative tasks and tracking information within your site.
+core: 8.x
+package: Core
+configure: admin/dashboard/customize
+version: VERSION
+dependencies:
+  - block
+files:
+  - dashboard.test

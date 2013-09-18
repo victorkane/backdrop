@@ -1,0 +1,6 @@
+name: Entity cache test dependency
+description: Support dependency module for testing entity cache.
+core: 8.x
+package: Testing
+version: VERSION
+hidden: true

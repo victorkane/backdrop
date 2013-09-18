@@ -1,0 +1,7 @@
+name: Syslog
+description: Logs and records system events to syslog.
+core: 8.x
+package: Core
+version: VERSION
+files:
+  - syslog.test

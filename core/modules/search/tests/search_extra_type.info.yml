@@ -1,0 +1,6 @@
+name: Test search type
+description: Support module for search module testing.
+core: 8.x
+package: Testing
+version: VERSION
+hidden: true

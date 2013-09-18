@@ -1,0 +1,6 @@
+name: Aggregator module tests
+description: Support module for aggregator related testing.
+core: 8.x
+package: Testing
+version: VERSION
+hidden: true

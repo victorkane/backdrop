@@ -1,0 +1,8 @@
+name: Path
+description: Allows users to rename URLs.
+core: 8.x
+package: Core
+configure: admin/config/search/path
+version: VERSION
+files:
+  - path.test

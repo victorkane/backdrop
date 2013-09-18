@@ -1,0 +1,11 @@
+name: File
+description: Defines a file field type.
+core: 8.x
+package: Core
+version: VERSION
+dependencies:
+  - field
+files:
+  - tests/file.test
+required: true
+explanation: 'Field type(s) in use - see <a href="/admin/reports/fields">Field list</a>'

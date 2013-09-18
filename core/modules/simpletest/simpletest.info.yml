@@ -1,0 +1,42 @@
+name: Testing
+description: Provides a framework for unit and functional testing.
+core: 8.x
+package: Core
+configure: admin/config/development/testing/settings
+version: VERSION
+files:
+  - simpletest.test
+  - drupal_web_test_case.php
+  - tests/actions.test
+  - tests/ajax.test
+  - tests/batch.test
+  - tests/bootstrap.test
+  - tests/cache.test
+  - tests/common.test
+  - tests/database_test.test
+  - tests/error.test
+  - tests/file.test
+  - tests/filetransfer.test
+  - tests/form.test
+  - tests/graph.test
+  - tests/image.test
+  - tests/installer.test
+  - tests/lock.test
+  - tests/mail.test
+  - tests/menu.test
+  - tests/module.test
+  - tests/pager.test
+  - tests/password.test
+  - tests/path.test
+  - tests/registry.test
+  - tests/schema.test
+  - tests/session.test
+  - tests/tablesort.test
+  - tests/theme.test
+  - tests/unicode.test
+  - tests/update.test
+  - tests/xmlrpc.test
+  - tests/upgrade/upgrade.test
+  - tests/upgrade/upgrade_bare.test
+  - tests/upgrade/upgrade_filled.test
+  - tests/upgrade/upgrade.language.test

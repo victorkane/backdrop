@@ -2818,7 +2818,7 @@ function drupal_add_html_head_link($attributes, $header = FALSE) {
  *     enabled, this should be set to TRUE if the stylesheet is present on every
  *     page of the website for users for whom it is present at all. This
  *     defaults to FALSE. It is set to TRUE for stylesheets added via module and
- *     theme .info files. Modules that add stylesheets within hook_init()
+ *     theme .info.yml files. Modules that add stylesheets within hook_init()
  *     implementations, or from other code that ensures that the stylesheet is
  *     added to all website pages, should also set this flag to TRUE. All
  *     stylesheets within the same group that have the 'every_page' flag set to
@@ -3312,7 +3312,7 @@ function drupal_pre_render_styles($elements) {
         elseif ($group['preprocess']) {
           $import = array();
           foreach ($group['items'] as $item) {
-            // A theme's .info file may have an entry for a file that doesn't
+            // A theme's .info.yml file may have entries for files that don't
             // exist as a way of overriding a module or base theme CSS file from
             // being added to the page. Normally, file_exists() calls that need
             // to run for every page request should be minimized, but this one
@@ -3353,9 +3353,9 @@ function drupal_pre_render_styles($elements) {
             // when aggregation is enabled, and we want to avoid needlessly
             // taxing a server that may be under heavy load. The file_exists()
             // performed above for files whose 'preprocess' is TRUE is done for
-            // the benefit of theme .info files, but code that deals with files
-            // whose 'preprocess' is FALSE is responsible for ensuring the file
-            // exists.
+            // the benefit of theme .info.yml files, but code that deals with
+            // files whose 'preprocess' is FALSE is responsible for ensuring the
+            // file exists.
             // The dummy query string needs to be added to the URL to control
             // browser-caching.
             $query_string_separator = (strpos($item['data'], '?') !== FALSE) ? '&' : '?';
@@ -3559,7 +3559,7 @@ function drupal_load_stylesheet($file, $optimize = NULL, $reset_basepath = TRUE)
   $basepath = dirname($file);
 
   // Load the CSS stylesheet. We suppress errors because themes may specify
-  // stylesheets in their .info file that don't exist in the theme's path,
+  // stylesheets in their .info.yml file that don't exist in the theme's path,
   // but are merely there to disable certain module CSS files.
   if ($contents = @file_get_contents($file)) {
     // Return the processed stylesheet.
@@ -3936,7 +3936,7 @@ function drupal_region_class($region) {
  *     enabled, this should be set to TRUE if the JavaScript is present on every
  *     page of the website for users for whom it is present at all. This
  *     defaults to FALSE. It is set to TRUE for JavaScript files that are added
- *     via module and theme .info files. Modules that add JavaScript within
+ *     via module and theme .info.yml files. Modules that add JavaScript within
  *     hook_init() implementations, or from other code that ensures that the
  *     JavaScript is added to all website pages, should also set this flag to
  *     TRUE. All JavaScript files within the same group and that have the
@@ -5384,8 +5384,8 @@ function drupal_system_listing($mask, $directory, $key = 'name', $min_depth = 1)
     foreach (array_intersect_key($files_to_add, $files) as $file_key => $file) {
       // If it has no info file, then we just behave liberally and accept the
       // new resource on the list for merging.
-      if (file_exists($info_file = dirname($file->uri) . '/' . $file->name . '.info')) {
-        // Get the .info file for the module or theme this file belongs to.
+      if (file_exists($info_file = dirname($file->uri) . '/' . $file->name . '.info.yml')) {
+        // Get the .info.yml file for the module or theme this file belongs to.
         $info = drupal_parse_info_file($info_file);
 
         // If the module or theme is incompatible with Drupal core, remove it
@@ -7267,21 +7267,21 @@ function drupal_write_record($table, &$record, $primary_keys = array()) {
  */
 
 /**
- * Parses Drupal module and theme .info files.
+ * Parses Drupal module and theme .info.yml files.
  *
  * Info files are NOT for placing arbitrary theme and module-specific settings.
  * Use variable_get() and variable_set() for that.
  *
- * Information stored in a module .info file:
+ * Information stored in a module .info.yml file:
  * - name: The real name of the module for display purposes.
  * - description: A brief description of the module.
  * - dependencies: An array of shortnames of other modules this module requires.
  * - package: The name of the package of modules this module belongs to.
  *
- * Information stored in a theme .info file:
+ * Information stored in a theme .info.yml file:
  * - name: The real name of the theme for display purposes.
  * - description: Brief description.
- * - screenshot: Path to screenshot relative to the theme's .info file.
+ * - screenshot: Path to screenshot relative to the theme's .info.yml file.
  * - engine: Theme engine; typically phptemplate.
  * - base: Name of a base theme, if applicable; e.g., base = zen.
  * - regions: Listed regions; e.g., region[left] = Left sidebar.
@@ -7289,7 +7289,7 @@ function drupal_write_record($table, &$record, $primary_keys = array()) {
  * - stylesheets: Theme stylesheets; e.g., stylesheets[all][] = my-style.css.
  * - scripts: Theme scripts; e.g., scripts[] = my-script.js.
  *
- * See bartik.info for an example of a theme .info file.
+ * See bartik.info for an example of a theme .info.yml file.
  *
  * @param $filename
  *   The file we are parsing. Accepts file with relative or absolute path.
@@ -7307,15 +7307,21 @@ function drupal_parse_info_file($filename) {
       $info[$filename] = array();
     }
     else {
+      // @todo: Remove this with the more efficient class registry.
+      // See https://github.com/backdrop/backdrop-issues/issues/77.
+      if (!class_exists('Spyc')) {
+        require_once DRUPAL_ROOT . '/core/vendor/spyc/Spyc.php';
+      }
+
       $data = file_get_contents($filename);
-      $info[$filename] = drupal_parse_info_format($data);
+      $info[$filename] = Spyc::YAMLLoadString($data);
     }
   }
   return $info[$filename];
 }
 
 /**
- * Parses data in Drupal's .info format.
+ * Parses data in Drupal's .info.yml format.
  *
  * Data should be in an .ini-like format to specify values. White-space
  * generally doesn't matter, except inside values:

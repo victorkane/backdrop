@@ -1,0 +1,6 @@
+name: Node module exception tests
+description: Support module for node related exception testing.
+core: 8.x
+package: Testing
+version: VERSION
+hidden: true

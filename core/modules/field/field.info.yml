@@ -1,0 +1,16 @@
+name: Field
+description: Field API to add fields to entities like nodes and users.
+core: 8.x
+package: Core
+version: VERSION
+dependencies:
+  - field_sql_storage
+  - entity
+stylesheets:
+  all:
+    theme/field.css: core/modules/field/theme/field.css
+files:
+  - field.module
+  - field.attach.inc
+  - tests/field.test
+required: true

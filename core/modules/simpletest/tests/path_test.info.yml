@@ -1,0 +1,6 @@
+name: Hook path tests
+description: Support module for path hook testing.
+core: 8.x
+package: Testing
+version: VERSION
+hidden: true

@@ -1,0 +1,9 @@
+name: Content Translation
+description: Allows content to be translated into different languages.
+core: 8.x
+package: Core
+version: VERSION
+dependencies:
+  - locale
+files:
+  - translation.test

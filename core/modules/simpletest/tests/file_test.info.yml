@@ -1,0 +1,8 @@
+name: File test
+description: Support module for file handling tests.
+core: 8.x
+package: Testing
+version: VERSION
+hidden: true
+files:
+  - file_test.module

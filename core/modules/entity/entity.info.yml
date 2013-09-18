@@ -1,0 +1,13 @@
+name: Entity
+description: API for managing entities like nodes and users.
+core: 8.x
+package: Core
+version: VERSION
+files:
+  - entity.class.inc
+  - entity.query.inc
+  - entity.controller.inc
+  - tests/entity_crud_hook_test.test
+  - tests/entity_query.test
+  - tests/entity.test
+required: true

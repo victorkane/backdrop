@@ -62,7 +62,7 @@ function update_get_projects() {
  * disabled code should be included in the Available updates report or not),
  * those are only processed after $projects has been populated with
  * information about the enabled code. 'Hidden' modules and themes are always
- * ignored. This function also records the latest change time on the .info
+ * ignored. This function also records the latest change time on the .info.yml
  * files for each module or theme, which is important data which is used when
  * deciding if the cached available update data should be invalidated.
  *
@@ -101,7 +101,7 @@ function _update_process_info_list(&$projects, $list, $project_type, $status) {
       continue;
     }
 
-    // Skip if the .info file is broken.
+    // Skip if the .info.yml file is broken.
     if (empty($file->info)) {
       continue;
     }
@@ -111,7 +111,7 @@ function _update_process_info_list(&$projects, $list, $project_type, $status) {
       continue;
     }
 
-    // If the .info doesn't define the 'project', try to figure it out.
+    // If the .info.yml doesn't define the 'project', try to figure it out.
     if (!isset($file->info['project'])) {
       $file->info['project'] = update_get_project_name($file);
     }
@@ -121,15 +121,15 @@ function _update_process_info_list(&$projects, $list, $project_type, $status) {
       continue;
     }
 
-    // If we don't already know it, grab the change time on the .info file
+    // If we don't already know it, grab the change time on the .info.yml file
     // itself. Note: we need to use the ctime, not the mtime (modification
     // time) since many (all?) tar implementations will go out of their way to
     // set the mtime on the files it creates to the timestamps recorded in the
     // tarball. We want to see the last time the file was changed on disk,
-    // which is left alone by tar and correctly set to the time the .info file
-    // was unpacked.
+    // which is left alone by tar and correctly set to the time the .info.yml
+    // file was unpacked.
     if (!isset($file->info['_info_file_ctime'])) {
-      $info_filename = dirname($file->uri) . '/' . $file->name . '.info';
+      $info_filename = dirname($file->uri) . '/' . $file->name . '.info.yml';
       $file->info['_info_file_ctime'] = filectime($info_filename);
     }
 
@@ -173,8 +173,8 @@ function _update_process_info_list(&$projects, $list, $project_type, $status) {
       // project can have multiple modules or themes.
       $projects[$project_name] = array(
         'name' => $project_name,
-        // Only save attributes from the .info file we care about so we do not
-        // bloat our RAM usage needlessly.
+        // Only save attributes from the .info.yml file we care about so we do
+        // not bloat our RAM usage needlessly.
         'info' => update_filter_project_info($file->info),
         'datestamp' => $file->info['datestamp'],
         'includes' => array($file->name => $file->info['name']),
@@ -258,7 +258,7 @@ function update_process_project_info(&$projects) {
       elseif (!isset($info['major'])) {
         // This would only happen for version strings that don't follow the
         // drupal.org convention. We let contribs define "major" in their
-        // .info in this case, and only if that's missing would we hit this.
+        // .info.yml in this case, and only if that's missing would we hit this.
         $info['major'] = -1;
       }
     }
@@ -613,7 +613,7 @@ function update_calculate_project_update_status($project, &$project_data, $avail
     // If we're running a dev snapshot and have a timestamp, stop
     // searching for security updates once we hit an official release
     // older than what we've got. Allow 100 seconds of leeway to handle
-    // differences between the datestamp in the .info file and the
+    // differences between the datestamp in the .info.yml file and the
     // timestamp of the tarball itself (which are usually off by 1 or 2
     // seconds) so that we don't flag that as a new release.
     if ($project_data['install_type'] == 'dev') {
@@ -710,7 +710,7 @@ function update_calculate_project_update_status($project, &$project_data, $avail
  * Retrieve data from {cache_update} or empty the cache when necessary.
  *
  * Two very expensive arrays computed by this module are the list of all
- * installed modules and themes (and .info data, project associations, etc),
+ * installed modules and themes (and .info.yml data, project associations, etc),
  * and the current status of the site relative to the currently available
  * releases. These two arrays are cached in the {cache_update} table and used
  * whenever possible. The cache is cleared whenever the administrator visits
@@ -764,10 +764,10 @@ function update_project_cache($cid) {
 }
 
 /**
- * Filter the project .info data to only save attributes we need.
+ * Filter the project .info.yml data to only save attributes we need.
  *
  * @param array $info
- *   Array of .info file data as returned by drupal_parse_info_file().
+ *   Array of .info.yml file data as returned by drupal_parse_info_file().
  *
  * @return
  *   Array of .info file data we need for the Update manager.

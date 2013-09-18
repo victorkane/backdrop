@@ -850,7 +850,7 @@ function module_invoke_all($hook) {
  * Array of modules required by core.
  */
 function drupal_required_modules() {
-  $files = drupal_system_listing('/^' . DRUPAL_PHP_FUNCTION_PATTERN . '\.info$/', 'modules', 'name', 0);
+  $files = drupal_system_listing('/^' . DRUPAL_PHP_FUNCTION_PATTERN . '\.info\.yml$/', 'modules', 'name', 0);
   $required = array();
 
   // An install profile is required and one must always be loaded.

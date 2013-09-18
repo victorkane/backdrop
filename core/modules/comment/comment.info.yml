@@ -1,0 +1,16 @@
+name: Comment
+description: Allows users to comment on and discuss published content.
+core: 8.x
+package: Core
+configure: admin/content/comment
+version: VERSION
+dependencies:
+  - node
+  - text
+  - entity
+stylesheets:
+  all:
+    comment.css: core/modules/comment/comment.css
+files:
+  - comment.entity.inc
+  - comment.test

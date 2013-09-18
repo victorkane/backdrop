@@ -1,0 +1,10 @@
+name: List
+description: Defines list field types. Use with Options to create selection lists.
+core: 8.x
+package: Core
+version: VERSION
+dependencies:
+  - field
+  - options
+files:
+  - tests/list.test

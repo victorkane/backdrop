@@ -1,0 +1,28 @@
+name: Standard
+description: Install with commonly used features pre-configured. dfadf
+core: 8.x
+version: VERSION
+dependencies:
+  - node
+  - block
+  - color
+  - comment
+  - contextual
+  - help
+  - image
+  - list
+  - menu
+  - number
+  - options
+  - path
+  - taxonomy
+  - dblog
+  - search
+  - shortcut
+  - toolbar
+  - overlay
+  - field_ui
+  - file
+  - rdf
+files:
+  - standard.profile

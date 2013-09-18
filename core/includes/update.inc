@@ -218,7 +218,7 @@ function update_module_add_to_system($modules = array()) {
     'bootstrap' => 0,
   );
   foreach ($modules as $module) {
-    $module_info = drupal_parse_info_file('core/modules/' . $module . '/' . $module . '.info');
+    $module_info = drupal_parse_info_file('core/modules/' . $module . '/' . $module . '.info.yml');
     db_insert('system')
       ->fields(array(
         'filename' => 'core/modules/' . $module . '/' . $module . '.module',

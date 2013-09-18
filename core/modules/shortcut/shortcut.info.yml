@@ -1,0 +1,8 @@
+name: Shortcut
+description: Allows users to manage customizable lists of shortcut links.
+core: 8.x
+package: Core
+configure: admin/config/user-interface/shortcut
+version: VERSION
+files:
+  - shortcut.test

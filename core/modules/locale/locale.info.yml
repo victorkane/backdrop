@@ -1,0 +1,9 @@
+name: Locale
+description: Provides language negotiation functionality and user interface translation to languages other than English.
+core: 8.x
+package: Core
+version: VERSION
+dependencies:
+  - language
+files:
+  - locale.test

@@ -2049,7 +2049,7 @@ function file_scan_directory($dir, $mask, $options = array(), $depth = 0) {
           $file = new stdClass();
           $file->uri = $uri;
           $file->filename = $filename;
-          $file->name = pathinfo($filename, PATHINFO_FILENAME);
+          $file->name = substr($filename, 0, strpos($filename, '.'));
           $key = $options['key'];
           $files[$file->$key] = $file;
           if ($options['callback']) {

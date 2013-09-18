@@ -11,8 +11,10 @@
  *   preprocess functions. The default values can be one or more of the following:
  *   - region: The current template type, i.e., "theming hook".
  *   - region-[name]: The name of the region with underscores replaced with
- *     dashes. For example, the page_top region would have a region-page-top class.
- * - $region: The name of the region variable as defined in the theme's .info file.
+ *     dashes. For example, the page_top region would have a region-page-top
+ *     class.
+ * - $region: The name of the region variable as defined in the theme's
+ *   .info.yml file.
  *
  * Helper variables:
  * - $classes_array: Array of html class attribute values. It is flattened

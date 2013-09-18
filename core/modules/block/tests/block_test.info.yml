@@ -1,0 +1,6 @@
+name: Block test
+description: Provides test blocks.
+core: 8.x
+package: Testing
+version: VERSION
+hidden: true

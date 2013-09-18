@@ -1,0 +1,8 @@
+name: Image test
+description: Provides hook implementations for testing Image module functionality.
+core: 8.x
+package: Core
+version: VERSION
+hidden: true
+files:
+  - image_module_test.module

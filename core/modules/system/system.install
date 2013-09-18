@@ -1539,7 +1539,7 @@ function system_schema() {
         'default' => 0,
       ),
       'info' => array(
-        'description' => "A serialized array containing information from the module's .info file; keys can include name, description, package, version, core, dependencies, and php.",
+        'description' => "A serialized array containing information from the module's .info.yml file; keys can include name, description, package, version, core, dependencies, and php.",
         'type' => 'blob',
         'not null' => FALSE,
       ),

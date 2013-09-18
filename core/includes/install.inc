@@ -183,7 +183,7 @@ function drupal_set_installed_schema_version($module, $version) {
  * Loads the install profile, extracting its defined distribution name.
  *
  * @return
- *   The distribution name defined in the profile's .info file. Defaults to
+ *   The distribution name defined in the profile's .info.yml file. Defaults to
  *   "Drupal" if none is explicitly provided by the install profile.
  *
  * @see install_profile_info()
@@ -1217,16 +1217,17 @@ function drupal_check_module($module) {
 }
 
 /**
- * Retrieve info about an install profile from its .info file.
+ * Retrieve info about an install profile from its .info.yml file.
  *
- * The information stored in a profile .info file is similar to that stored in
- * a normal Drupal module .info file. For example:
+ * The information stored in a profile .info.yml file is similar to that stored
+ * in a normal Drupal module .info.yml file. For example:
  * - name: The real name of the install profile for display purposes.
  * - description: A brief description of the profile.
  * - dependencies: An array of shortnames of other modules this install profile requires.
  *
- * Additional, less commonly-used information that can appear in a profile.info
- * file but not in a normal Drupal module .info file includes:
+ * Additional, less commonly-used information that can appear in a
+ * profile.info.yml file but not in a normal Drupal module .info.yml file
+ * includes:
  * - distribution_name: The name of the Drupal distribution that is being
  *   installed, to be shown throughout the installation process. Defaults to
  *   'Drupal'.
@@ -1235,7 +1236,7 @@ function drupal_check_module($module) {
  * information for dependencies. If you only need information from the info
  * file itself, use system_get_info().
  *
- * Example of .info file:
+ * Example of .info.yml file:
  * @code
  *    name = Minimal
  *    description = Start fresh, with only a few modules enabled.
@@ -1264,7 +1265,7 @@ function install_profile_info($profile, $langcode = 'en') {
       'hidden' => FALSE,
       'php' => DRUPAL_MINIMUM_PHP,
     );
-    $info = drupal_parse_info_file("profiles/$profile/$profile.info") + $defaults;
+    $info = drupal_parse_info_file("profiles/$profile/$profile.info.yml") + $defaults;
     $info['dependencies'] = array_unique(array_merge(
       drupal_required_modules(),
       $info['dependencies'],

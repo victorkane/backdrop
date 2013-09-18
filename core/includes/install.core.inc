@@ -162,7 +162,7 @@ function install_state_defaults() {
     // redirect.
     'parameters_changed' => FALSE,
     // An array of information about the chosen installation profile. This will
-    // be filled in based on the profile's .info file.
+    // be filled in based on the profile's .info.yml file.
     'profile_info' => array(),
     // An array of available installation profiles.
     'profiles' => array(),
@@ -1115,8 +1115,8 @@ function install_select_profile_form($form, &$form_state, $profile_files) {
 
   foreach ($names as $profile => $name) {
     // The profile name and description are extracted for translation from the
-    // .info file, so we can use st() on them even though they are dynamic data
-    // at this point.
+    // .info.yml file, so we can use st() on them even though they are dynamic
+    // data at this point.
     $form['profile'][$name] = array(
       '#type' => 'radio',
       '#value' => 'standard',

@@ -1,0 +1,7 @@
+name: Help
+description: Manages the display of online help.
+core: 8.x
+package: Core
+version: VERSION
+files:
+  - help.test

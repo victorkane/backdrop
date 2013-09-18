@@ -1,0 +1,7 @@
+name: PHP Filter
+description: Allows embedded PHP code/snippets to be evaluated.
+core: 8.x
+package: Core
+version: VERSION
+files:
+  - php.test

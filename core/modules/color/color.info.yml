@@ -1,0 +1,7 @@
+name: Color
+description: Allows administrators to change the color scheme of compatible themes.
+core: 8.x
+package: Core
+version: VERSION
+files:
+  - color.test

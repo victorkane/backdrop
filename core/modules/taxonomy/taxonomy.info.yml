@@ -1,0 +1,14 @@
+name: Taxonomy
+description: Enables the categorization of content.
+core: 8.x
+package: Core
+configure: admin/structure/taxonomy
+version: VERSION
+dependencies:
+  - options
+  - entity
+files:
+  - taxonomy.module
+  - taxonomy.test
+required: true
+explanation: 'Field type(s) in use - see <a href="/admin/reports/fields">Field list</a>'

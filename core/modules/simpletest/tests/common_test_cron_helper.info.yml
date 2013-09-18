@@ -1,0 +1,6 @@
+name: Common Test Cron Helper
+description: Helper module for CronRunTestCase::testCronExceptions().
+core: 7.x
+package: Testing
+version: VERSION
+hidden: true

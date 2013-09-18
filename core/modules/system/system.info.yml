@@ -1,0 +1,14 @@
+name: System
+description: Handles general site configuration for administrators.
+core: 8.x
+package: Core
+configure: admin/config/system
+version: VERSION
+files:
+  - system.archiver.inc
+  - system.mail.inc
+  - system.queue.inc
+  - system.tar.inc
+  - system.updater.inc
+  - system.test
+required: true

@@ -1,0 +1,6 @@
+name: Filter test module
+description: Tests filter hooks and functions.
+core: 8.x
+package: Testing
+version: VERSION
+hidden: true

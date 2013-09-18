@@ -1,0 +1,6 @@
+name: Actions loop test
+description: Support module for action loop testing.
+core: 8.x
+package: Testing
+version: VERSION
+hidden: true

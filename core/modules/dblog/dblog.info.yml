@@ -1,0 +1,7 @@
+name: Database Logging
+description: Logs and records system events to the database.
+core: 8.x
+package: Core
+version: VERSION
+files:
+  - dblog.test

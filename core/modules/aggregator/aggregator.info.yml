@@ -1,0 +1,11 @@
+name: Aggregator
+description: Aggregates syndicated content (RSS, RDF, and Atom feeds) from external sources.
+core: 8.x
+package: Core
+configure: admin/config/services/aggregator/settings
+version: VERSION
+stylesheets:
+  all:
+    aggregator.theme.css: core/modules/aggregator/aggregator.theme.css
+files:
+  - aggregator.test
