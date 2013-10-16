@@ -2563,8 +2563,6 @@ function drupal_deliver_html_page($page_callback_result) {
  * react to the closing of the page by calling hook_exit().
  */
 function drupal_page_footer() {
-  global $user;
-
   module_invoke_all('exit');
 
   // Commit the user session, if needed.
@@ -2577,7 +2575,6 @@ function drupal_page_footer() {
     ob_flush();
   }
 
-  _registry_check_code(REGISTRY_WRITE_LOOKUP_CACHE);
   drupal_cache_system_paths();
   module_implements_write_cache();
   system_run_automated_cron();
@@ -7492,12 +7489,11 @@ function drupal_flush_all_caches() {
   // Change query-strings on css/js files to enforce reload for all users.
   _drupal_flush_css_js();
 
-  registry_rebuild();
+  system_rebuild_module_data();
   drupal_clear_css_cache();
   drupal_clear_js_cache();
 
-  // Rebuild the theme data. Note that the module data is rebuilt above, as
-  // part of registry_rebuild().
+  // Rebuild the theme data.
   system_rebuild_theme_data();
   drupal_theme_rebuild();
 

@@ -3718,9 +3718,9 @@ function user_cookie_delete($cookie_name) {
 }
 
 /**
- * Implements hook_class_info().
+ * Implements hook_autoload_info().
  */
-function user_class_info() {
+function user_autoload_info() {
   return array(
     'UserController' => 'user.entity.inc',
   );

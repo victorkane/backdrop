@@ -3798,9 +3798,9 @@ function system_archiver_info() {
 }
 
 /**
- * Implements hook_class_info().
+ * Implements hook_autoload_info().
  */
-function system_class_info() {
+function system_autoload_info() {
   return array(
     'ArchiverTar' => 'system.archiver.inc',
     'ArchiverZip' => 'system.archiver.inc',

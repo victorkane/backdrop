@@ -4037,9 +4037,9 @@ function node_modules_disabled($modules) {
 }
 
 /**
- * Implements hook_class_info().
+ * Implements hook_autoload_info().
  */
-function node_class_info() {
+function node_autoload_info() {
   return array(
     'NodeController' => 'node.entity.inc',
   );

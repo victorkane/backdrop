@@ -1292,9 +1292,9 @@ function search_forms() {
 }
 
 /**
- * Implements hook_class_info().
+ * Implements hook_autoload_info().
  */
-function search_class_info() {
+function search_autoload_info() {
   return array(
     'SearchQuery' => 'search.extender.inc',
   );

@@ -2962,12 +2962,6 @@ function drupal_get_complete_schema($rebuild = FALSE) {
  * @} End of "ingroup schemaapi".
  */
 
-
-/**
- * @ingroup registry
- * @{
- */
-
 /**
  * Confirms that a class is available.
  *
@@ -2990,14 +2984,14 @@ function drupal_autoload($class) {
     // module_invoke_all() because it uses array_merge_recursive(), which is an
     // expensive O(n^2) operation. Instead we use module_implements() and merge
     // the array with +=, which is O(n).
-    foreach (module_implements('class_info') as $module) {
-      $module_classes = module_invoke($module, 'class_info');
+    foreach (module_implements('autoload_info') as $module) {
+      $module_classes = module_invoke($module, 'autoload_info');
       $module_path = drupal_get_path('module', $module);
       foreach ($module_classes as $module_class => $relative_path) {
         $class_registry[$module_class] = DRUPAL_ROOT . '/' . $module_path . '/' . $relative_path;
       }
     }
-    drupal_alter('class_info', $class_registry);
+    drupal_alter('autoload_info', $class_registry);
   }
 
   if (isset($class_registry[$class])) {
@@ -3006,39 +3000,6 @@ function drupal_autoload($class) {
   }
   return FALSE;
 }
-
-/**
- * Checks for a resource in the registry.
- *
- * @param $type
- *   The type of resource we are looking up, or one of the constants
- *   REGISTRY_RESET_LOOKUP_CACHE or REGISTRY_WRITE_LOOKUP_CACHE, which
- *   signal that we should reset or write the cache, respectively.
- * @param $name
- *   The name of the resource, or NULL if either of the REGISTRY_* constants
- *   is passed in.
- *
- * @return
- *   TRUE if the resource was found, FALSE if not.
- *   NULL if either of the REGISTRY_* constants is passed in as $type.
- */
-function _registry_check_code($type, $name = NULL) {
-}
-
-/**
- * Rescans all enabled modules and rebuilds the registry.
- *
- * Rescans all code in modules or includes directories, storing the location of
- * each interface or class in the database.
- */
-function registry_rebuild() {
-  system_rebuild_module_data();
-  registry_update();
-}
-
-/**
- * @} End of "ingroup registry".
- */
 
 /**
  * Provides central static variable storage.

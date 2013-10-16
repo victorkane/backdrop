@@ -415,7 +415,6 @@ function simpletest_clean_environment() {
   }
 
   // Detect test classes that have been added, renamed or deleted.
-  registry_rebuild();
   cache()->delete('simpletest');
 }
 

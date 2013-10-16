@@ -2458,9 +2458,9 @@ function comment_file_download_access($field, $entity_type, $entity) {
 }
 
 /**
- * Implements hook_class_info().
+ * Implements hook_autoload_info().
  */
-function comment_class_info() {
+function comment_autoload_info() {
   return array(
     'Comment' => 'comment.entity.inc',
     'CommentStorageController' => 'comment.entity.inc',

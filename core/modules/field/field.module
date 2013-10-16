@@ -359,9 +359,9 @@ function field_system_info_alter(&$info, $file, $type) {
 }
 
 /**
- * Implements hook_class_info().
+ * Implements hook_autoload_info().
  */
-function field_class_info() {
+function field_autoload_info() {
   return array(
     'FieldException' => 'field.exceptions.inc',
     'FieldUpdateForbiddenException' => 'field.exceptions.inc',

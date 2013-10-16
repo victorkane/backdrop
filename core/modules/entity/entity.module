@@ -461,9 +461,9 @@ function entity_form_submit_build_entity($entity_type, $entity, $form, &$form_st
 }
 
 /**
- * Implements hook_class_info().
+ * Implements hook_autoload_info().
  */
-function entity_class_info() {
+function entity_autoload_info() {
   return array(
     'EntityInterface' => 'entity.class.inc',
     'Entity' => 'entity.class.inc',
