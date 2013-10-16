@@ -10,7 +10,7 @@
  *
  * Field UI's "Manage fields" and "Manage display" pages let users re-order
  * fields, but also non-field components. For nodes, these include the title,
- * poll choices, and other elements exposed by modules through hook_form() or
+ * path aliases, and other elements exposed by modules through hook_form() or
  * hook_form_alter().
  *
  * Fieldable entities or modules that want to have their components supported
@@ -33,28 +33,18 @@
  *   - weight: The default weight of the element.
  */
 function hook_field_extra_fields() {
-  $extra['node']['poll'] = array(
+  $extra['node']['example'] = array(
     'form' => array(
-      'choice_wrapper' => array(
-        'label' => t('Poll choices'),
-        'description' => t('Poll choices'),
-        'weight' => -4,
-      ),
       'settings' => array(
-        'label' => t('Poll settings'),
-        'description' => t('Poll module settings'),
+        'label' => t('settings'),
+        'description' => t('Example module settings'),
         'weight' => -3,
       ),
     ),
     'display' => array(
-      'poll_view_voting' => array(
-        'label' => t('Poll vote'),
-        'description' => t('Poll vote'),
-        'weight' => 0,
-      ),
-      'poll_view_results' => array(
-        'label' => t('Poll results'),
-        'description' => t('Poll results'),
+      'example_data' => array(
+        'label' => t('Data'),
+        'description' => t('Example module data'),
         'weight' => 0,
       ),
     )
@@ -1366,18 +1356,12 @@ function hook_field_attach_purge($entity_type, $entity, $field, $instance) {
  *   - language: The language code used for rendering.
  */
 function hook_field_attach_view_alter(&$output, $context) {
-  // Append RDF term mappings on displayed taxonomy links.
   foreach (element_children($output) as $field_name) {
     $element = &$output[$field_name];
     if ($element['#field_type'] == 'taxonomy_term_reference' && $element['#formatter'] == 'taxonomy_term_reference_link') {
       foreach ($element['#items'] as $delta => $item) {
         $term = $item['taxonomy_term'];
-        if (!empty($term->rdf_mapping['rdftype'])) {
-          $element[$delta]['#options']['attributes']['typeof'] = $term->rdf_mapping['rdftype'];
-        }
-        if (!empty($term->rdf_mapping['name']['predicates'])) {
-          $element[$delta]['#options']['attributes']['property'] = $term->rdf_mapping['name']['predicates'];
-        }
+        $element[$delta]['#options']['attributes']['title'] = t($term->name);
       }
     }
   }
@@ -2088,9 +2072,9 @@ function hook_field_storage_pre_load($entity_type, $entities, $age, &$skip_field
  *   Saved field IDs are set set as keys in $skip_fields.
  */
 function hook_field_storage_pre_insert($entity_type, $entity, &$skip_fields) {
-  if ($entity_type == 'node' && $entity->status && _forum_node_check_node_type($entity)) {
-    $query = db_insert('forum_index')->fields(array('nid', 'title', 'tid', 'sticky', 'created', 'comment_count', 'last_comment_timestamp'));
-    foreach ($entity->taxonomy_forums as $language) {
+  if ($entity_type == 'node' && $entity->status) {
+    $query = db_insert('custom_index')->fields(array('nid', 'title', 'tid', 'sticky', 'created', 'comment_count', 'last_comment_timestamp'));
+    foreach ($entity->custom as $language) {
       foreach ($language as $delta) {
         $query->values(array(
           'nid' => $entity->nid,
@@ -2127,18 +2111,18 @@ function hook_field_storage_pre_insert($entity_type, $entity, &$skip_fields) {
 function hook_field_storage_pre_update($entity_type, $entity, &$skip_fields) {
   $first_call = &drupal_static(__FUNCTION__, array());
 
-  if ($entity_type == 'node' && $entity->status && _forum_node_check_node_type($entity)) {
+  if ($entity_type == 'node' && $entity->status) {
     // We don't maintain data for old revisions, so clear all previous values
     // from the table. Since this hook runs once per field, per entity, make
     // sure we only wipe values once.
     if (!isset($first_call[$entity->nid])) {
       $first_call[$entity->nid] = FALSE;
-      db_delete('forum_index')->condition('nid', $entity->nid)->execute();
+      db_delete('custom_index')->condition('nid', $entity->nid)->execute();
     }
     // Only save data to the table if the node is published.
     if ($entity->status) {
-      $query = db_insert('forum_index')->fields(array('nid', 'title', 'tid', 'sticky', 'created', 'comment_count', 'last_comment_timestamp'));
-      foreach ($entity->taxonomy_forums as $language) {
+      $query = db_insert('custom_index')->fields(array('nid', 'title', 'tid', 'sticky', 'created', 'comment_count', 'last_comment_timestamp'));
+      foreach ($entity->custom as $language) {
         foreach ($language as $delta) {
           $query->values(array(
             'nid' => $entity->nid,
@@ -2152,9 +2136,6 @@ function hook_field_storage_pre_update($entity_type, $entity, &$skip_fields) {
         }
       }
       $query->execute();
-      // The logic for determining last_comment_count is fairly complex, so
-      // call _forum_update_forum_index() too.
-      _forum_update_forum_index($entity->nid);
     }
   }
 }

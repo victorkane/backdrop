@@ -1974,23 +1974,6 @@ function format_date($timestamp, $type = 'medium', $format = '', $timezone = NUL
 }
 
 /**
- * Returns an ISO8601 formatted date based on the given date.
- *
- * Callback for use within hook_rdf_mapping() implementations.
- *
- * @param $date
- *   A UNIX timestamp.
- *
- * @return string
- *   An ISO8601 formatted date.
- */
-function date_iso8601($date) {
-  // The DATE_ISO8601 constant cannot be used here because it does not match
-  // date('c') and produces invalid RDF markup.
-  return date('c', $date);
-}
-
-/**
  * Translates a formatted date string.
  *
  * Callback for preg_replace_callback() within format_date().
@@ -6797,9 +6780,6 @@ function drupal_common_theme() {
     'table' => array(
       'variables' => array('header' => NULL, 'rows' => NULL, 'attributes' => array(), 'caption' => NULL, 'colgroups' => array(), 'sticky' => TRUE, 'empty' => ''),
     ),
-    'meter' => array(
-      'variables' => array('display_value' => NULL, 'form' => NULL, 'high' => NULL, 'low' => NULL, 'max' => NULL, 'min' => NULL, 'optimum' => NULL, 'value' => NULL, 'percentage' => NULL, 'attributes' => array()),
-    ),
     'tablesort_indicator' => array(
       'variables' => array('style' => NULL),
     ),
@@ -6920,6 +6900,9 @@ function drupal_common_theme() {
       'render element' => 'element',
     ),
     'tel' => array(
+      'render element' => 'element',
+    ),
+    'email' => array(
       'render element' => 'element',
     ),
     'form' => array(
@@ -7278,8 +7261,6 @@ function drupal_write_record($table, &$record, $primary_keys = array()) {
  * - dependencies: An array of shortnames of other modules this module requires.
  * - package: The name of the package of modules this module belongs to.
  *
- * See forum.info for an example of a module .info file.
- *
  * Information stored in a theme .info file:
  * - name: The real name of the theme for display purposes.
  * - description: Brief description.
@@ -7295,13 +7276,15 @@ function drupal_write_record($table, &$record, $primary_keys = array()) {
  *
  * @param $filename
  *   The file we are parsing. Accepts file with relative or absolute path.
+ * @param bool $process_sections
+ *   Flag indicating if sections should be parsed.
  *
  * @return
  *   The info array.
  *
  * @see drupal_parse_info_format()
  */
-function drupal_parse_info_file($filename) {
+function drupal_parse_info_file($filename, $process_sections = FALSE) {
   $info = &drupal_static(__FUNCTION__, array());
 
   if (!isset($info[$filename])) {
@@ -7310,7 +7293,7 @@ function drupal_parse_info_file($filename) {
     }
     else {
       $data = file_get_contents($filename);
-      $info[$filename] = drupal_parse_info_format($data);
+      $info[$filename] = drupal_parse_info_format($data, $process_sections);
     }
   }
   return $info[$filename];
@@ -7345,17 +7328,38 @@ function drupal_parse_info_file($filename) {
  * PHP constants are substituted in, but only when used as the entire value.
  * Comments should start with a semi-colon at the beginning of a line.
  *
- * @param $data
+ * @param string $data
  *   A string to parse.
+ * @param bool $process_sections
+ *   Flag indicating if sections should be parsed.
  *
  * @return
  *   The info array.
  *
  * @see drupal_parse_info_file()
  */
-function drupal_parse_info_format($data) {
+function drupal_parse_info_format($data, $process_sections = FALSE) {
   $info = array();
   $constants = get_defined_constants();
+
+  // Separate by sections and parse individually if requested.
+  if ($process_sections) {
+    // Remove leading a trailing comments before groups.
+    $data = trim(preg_replace('/;.*$/m', '', $data));
+
+    // Split the content by the groups present.
+    $split = preg_split('/^\[(.*)\]\s*$/m', $data, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+    $split_count = count($split);
+
+    // If sections are found, parse each individually and add to the result.
+    if ($split_count > 1) {
+      $info_sections = array();
+      for ($n = 0; $n < $split_count; $n = $n + 2) {
+        $info_sections[$split[$n]] = drupal_parse_info_format($split[$n + 1], FALSE);
+      }
+      return $info_sections;
+    }
+  }
 
   if (preg_match_all('
     @^\s*                           # Start at the beginning of a line, ignoring leading whitespace
@@ -7641,39 +7645,6 @@ function drupal_check_incompatibility($v, $current_version) {
       }
     }
   }
-}
-
-/**
- * Performs one or more XML-RPC request(s).
- *
- * Usage example:
- * @code
- * $result = xmlrpc('http://example.com/xmlrpc.php', array(
- *   'service.methodName' => array($parameter, $second, $third),
- * ));
- * @endcode
- *
- * @param $url
- *   An absolute URL of the XML-RPC endpoint.
- * @param $args
- *   An associative array whose keys are the methods to call and whose values
- *   are the arguments to pass to the respective method. If multiple methods
- *   are specified, a system.multicall is performed.
- * @param $options
- *   (optional) An array of options to pass along to drupal_http_request().
- *
- * @return
- *   For one request:
- *     Either the return value of the method on success, or FALSE.
- *     If FALSE is returned, see xmlrpc_errno() and xmlrpc_error_msg().
- *   For multiple requests:
- *     An array of results. Each result will either be the result
- *     returned by the method called, or an xmlrpc_error object if the call
- *     failed. See xmlrpc_error().
- */
-function xmlrpc($url, $args, $options = array()) {
-  require_once DRUPAL_ROOT . '/core/includes/xmlrpc.inc';
-  return _xmlrpc($url, $args, $options);
 }
 
 /**

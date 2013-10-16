@@ -9,15 +9,6 @@
  * Tests the node_load_multiple() function.
  */
 class NodeLoadMultipleUnitTest extends DrupalWebTestCase {
-
-  public static function getInfo() {
-    return array(
-      'name' => 'Load multiple nodes',
-      'description' => 'Test the loading of multiple nodes.',
-      'group' => 'Node',
-    );
-  }
-
   function setUp() {
     parent::setUp();
     $web_user = $this->drupalCreateUser(array('create article content', 'create page content'));
@@ -89,14 +80,6 @@ class NodeLoadMultipleUnitTest extends DrupalWebTestCase {
  * Tests for the hooks invoked during node_load().
  */
 class NodeLoadHooksTestCase extends DrupalWebTestCase {
-  public static function getInfo() {
-    return array(
-      'name' => 'Node load hooks',
-      'description' => 'Test the hooks invoked when a node is being loaded.',
-      'group' => 'Node',
-    );
-  }
-
   function setUp() {
     parent::setUp('node_test');
   }
@@ -132,14 +115,6 @@ class NodeLoadHooksTestCase extends DrupalWebTestCase {
 class NodeRevisionsTestCase extends DrupalWebTestCase {
   protected $nodes;
   protected $logs;
-
-  public static function getInfo() {
-    return array(
-      'name' => 'Node revisions',
-      'description' => 'Create a node with revisions and test viewing, saving, reverting, and deleting revisions.',
-      'group' => 'Node',
-    );
-  }
 
   function setUp() {
     parent::setUp();
@@ -266,14 +241,6 @@ class PageEditTestCase extends DrupalWebTestCase {
   protected $web_user;
   protected $admin_user;
 
-  public static function getInfo() {
-    return array(
-      'name' => 'Node edit',
-      'description' => 'Create a node and test node edit functionality.',
-      'group' => 'Node',
-    );
-  }
-
   function setUp() {
     parent::setUp();
 
@@ -395,14 +362,6 @@ class PageEditTestCase extends DrupalWebTestCase {
 }
 
 class PagePreviewTestCase extends DrupalWebTestCase {
-  public static function getInfo() {
-    return array(
-      'name' => 'Node preview',
-      'description' => 'Test node preview functionality.',
-      'group' => 'Node',
-    );
-  }
-
   function setUp() {
     parent::setUp();
 
@@ -466,14 +425,6 @@ class PagePreviewTestCase extends DrupalWebTestCase {
 }
 
 class NodeCreationTestCase extends DrupalWebTestCase {
-  public static function getInfo() {
-    return array(
-      'name' => 'Node creation',
-      'description' => 'Create a node and test saving it.',
-      'group' => 'Node',
-    );
-  }
-
   function setUp() {
     // Enable dummy module that implements hook_node_insert for exceptions.
     parent::setUp('node_test_exception');
@@ -544,14 +495,6 @@ class NodeCreationTestCase extends DrupalWebTestCase {
 }
 
 class PageViewTestCase extends DrupalWebTestCase {
-  public static function getInfo() {
-    return array(
-      'name' => 'Node edit permissions',
-      'description' => 'Create a node and test edit permissions.',
-      'group' => 'Node',
-    );
-  }
-
   /**
    * Creates a node and then an anonymous and unpermissioned user attempt to edit the node.
    */
@@ -583,14 +526,6 @@ class PageViewTestCase extends DrupalWebTestCase {
 }
 
 class SummaryLengthTestCase extends DrupalWebTestCase {
-  public static function getInfo() {
-    return array(
-      'name' => 'Summary length',
-      'description' => 'Test summary length.',
-      'group' => 'Node',
-    );
-  }
-
   /**
    * Creates a node and then an anonymous and unpermissioned user attempt to edit the node.
    */
@@ -625,14 +560,6 @@ class SummaryLengthTestCase extends DrupalWebTestCase {
 }
 
 class NodeTitleXSSTestCase extends DrupalWebTestCase {
-  public static function getInfo() {
-    return array(
-      'name' => 'Node title XSS filtering',
-      'description' => 'Create a node with dangerous tags in its title and test that they are escaped.',
-      'group' => 'Node',
-    );
-  }
-
   function testNodeTitleXSS() {
     // Prepare a user to do the stuff.
     $web_user = $this->drupalCreateUser(array('create page content', 'edit any page content'));
@@ -659,14 +586,6 @@ class NodeTitleXSSTestCase extends DrupalWebTestCase {
 }
 
 class NodeBlockTestCase extends DrupalWebTestCase {
-  public static function getInfo() {
-    return array(
-      'name' => 'Block availability',
-      'description' => 'Check if the syndicate block is available.',
-      'group' => 'Node',
-    );
-  }
-
   function setUp() {
     parent::setUp();
 
@@ -692,14 +611,6 @@ class NodeBlockTestCase extends DrupalWebTestCase {
  * Check that the post information displays when enabled for a content type.
  */
 class NodePostSettingsTestCase extends DrupalWebTestCase {
-  public static function getInfo() {
-    return array(
-      'name' => 'Node post information display',
-      'description' => 'Check that the post information (submitted by Username on date) text displays appropriately.',
-      'group' => 'Node',
-    );
-  }
-
   function setUp() {
     parent::setUp();
 
@@ -761,14 +672,6 @@ class NodePostSettingsTestCase extends DrupalWebTestCase {
  * sitewide RSS feed at rss.xml.
  */
 class NodeRSSContentTestCase extends DrupalWebTestCase {
-  public static function getInfo() {
-    return array(
-      'name' => 'Node RSS Content',
-      'description' => 'Ensure that data added to nodes by other modules appears in RSS feeds.',
-      'group' => 'Node',
-    );
-  }
-
   function setUp() {
     // Enable dummy module that implements hook_node_view.
     parent::setUp('node_test');
@@ -822,14 +725,6 @@ class NodeRSSContentTestCase extends DrupalWebTestCase {
  * hook_node_access_records is covered in another test class.
  */
 class NodeAccessUnitTest extends DrupalWebTestCase {
-  public static function getInfo() {
-    return array(
-      'name' => 'Node access',
-      'description' => 'Test node_access function',
-      'group' => 'Node',
-    );
-  }
-
   /**
    * Asserts node_access correctly grants or denies access.
    */
@@ -889,14 +784,6 @@ class NodeAccessUnitTest extends DrupalWebTestCase {
  * Test case to verify hook_node_access_records functionality.
  */
 class NodeAccessRecordsUnitTest extends DrupalWebTestCase {
-  public static function getInfo() {
-    return array(
-      'name' => 'Node access records',
-      'description' => 'Test hook_node_access_records when acquiring grants.',
-      'group' => 'Node',
-    );
-  }
-
   function setUp() {
     // Enable dummy module that implements hook_node_grants(),
     // hook_node_access_records(), hook_node_grants_alter() and
@@ -972,15 +859,6 @@ class NodeAccessRecordsUnitTest extends DrupalWebTestCase {
  * Tests for Node Access with a non-node base table.
  */
 class NodeAccessBaseTableTestCase extends DrupalWebTestCase {
-
-  public static function getInfo() {
-    return array(
-      'name' => 'Node Access on any table',
-      'description' => 'Checks behavior of the node access subsystem if the base table is not node.',
-      'group' => 'Node',
-    );
-  }
-
   /**
    * Enable modules and create user with specific permissions.
    */
@@ -1131,15 +1009,6 @@ class NodeAccessBaseTableTestCase extends DrupalWebTestCase {
  * Test case to check node save related functionality, including import-save
  */
 class NodeSaveTestCase extends DrupalWebTestCase {
-
-  public static function getInfo() {
-    return array(
-      'name' => 'Node save',
-      'description' => 'Test node_save() for saving content.',
-      'group' => 'Node',
-    );
-  }
-
   function setUp() {
     parent::setUp('node_test');
     // Create a user that is allowed to post; we'll use this to test the submission.
@@ -1274,14 +1143,6 @@ class NodeSaveTestCase extends DrupalWebTestCase {
  * Tests related to node types.
  */
 class NodeTypeTestCase extends DrupalWebTestCase {
-  public static function getInfo() {
-    return array(
-      'name' => 'Node types',
-      'description' => 'Ensures that node type functions work correctly.',
-      'group' => 'Node',
-    );
-  }
-
   /**
    * Ensure that node type functions (node_type_get_*) work correctly.
    *
@@ -1389,19 +1250,13 @@ class NodeTypeTestCase extends DrupalWebTestCase {
    */
   function testNodeTypeStatus() {
     // Enable all core node modules, and all types should be active.
-    module_enable(array('book', 'poll'), FALSE);
+    module_enable(array('book'), FALSE);
     node_types_rebuild();
     $types = node_type_get_types();
-    foreach (array('book', 'poll', 'article', 'page') as $type) {
+    foreach (array('book', 'article', 'page') as $type) {
       $this->assertTrue(isset($types[$type]), t('%type is found in node types.', array('%type' => $type)));
       $this->assertTrue(isset($types[$type]->disabled) && empty($types[$type]->disabled), t('%type type is enabled.', array('%type' => $type)));
     }
-
-    // Disable poll module and the respective type should be marked as disabled.
-    module_disable(array('poll'), FALSE);
-    node_types_rebuild();
-    $types = node_type_get_types();
-    $this->assertTrue(!empty($types['poll']->disabled), t("Poll module's node type disabled."));
 
     // Disable book module and the respective type should still be active, since
     // it is not provided by hook_node_info().
@@ -1409,15 +1264,14 @@ class NodeTypeTestCase extends DrupalWebTestCase {
     node_types_rebuild();
     $types = node_type_get_types();
     $this->assertTrue(isset($types['book']) && empty($types['book']->disabled), t("Book module's node type still active."));
-    $this->assertTrue(!empty($types['poll']->disabled), t("Poll module's node type still disabled."));
     $this->assertTrue(isset($types['article']) && empty($types['article']->disabled), t("Article node type still active."));
     $this->assertTrue(isset($types['page']) && empty($types['page']->disabled), t("Basic page node type still active."));
 
     // Re-enable the modules and verify that the types are active again.
-    module_enable(array('book', 'poll'), FALSE);
+    module_enable(array('book'), FALSE);
     node_types_rebuild();
     $types = node_type_get_types();
-    foreach (array('book', 'poll', 'article', 'page') as $type) {
+    foreach (array('book', 'article', 'page') as $type) {
       $this->assertTrue(isset($types[$type]), t('%type is found in node types.', array('%type' => $type)));
       $this->assertTrue(isset($types[$type]->disabled) && empty($types[$type]->disabled), t('%type type is enabled.', array('%type' => $type)));
     }
@@ -1428,73 +1282,64 @@ class NodeTypeTestCase extends DrupalWebTestCase {
  * Test node type customizations persistence.
  */
 class NodeTypePersistenceTestCase extends DrupalWebTestCase {
-  public static function getInfo() {
-    return array(
-      'name' => 'Node type persist',
-      'description' => 'Ensures that node type customization survives module enabling and disabling.',
-      'group' => 'Node',
-    );
-  }
-
   /**
    * Test node type customizations persist through disable and uninstall.
    */
   function testNodeTypeCustomizationPersistence() {
     $web_user = $this->drupalCreateUser(array('bypass node access', 'administer content types', 'administer modules'));
     $this->drupalLogin($web_user);
-    $poll_key = 'modules[Core][poll][enable]';
-    $poll_enable = array($poll_key => "1");
-    $poll_disable = array($poll_key => FALSE);
 
-    // Enable poll and verify that the node type is in the DB and is not
-    // disabled.
-    $this->drupalPost('admin/modules', $poll_enable, t('Save configuration'));
-    $disabled = db_query('SELECT disabled FROM {node_type} WHERE type = :type', array(':type' => 'poll'))->fetchField();
-    $this->assertNotIdentical($disabled, FALSE, t('Poll node type found in the database'));
-    $this->assertEqual($disabled, 0, t('Poll node type is not disabled'));
+    // Enable the test module and verify that the test node type is in the DB
+    // and is not disabled.
+    module_enable(array('node_test'), FALSE);
+    node_types_rebuild();
+    $disabled = db_query('SELECT disabled FROM {node_type} WHERE type = :type', array(':type' => 'test'))->fetchField();
+    $this->assertNotIdentical($disabled, FALSE, t('Test node type found in the database'));
+    $this->assertEqual($disabled, 0, t('Test node type is not disabled'));
 
-    // Check that poll node type (uncustomized) shows up.
+    // Check that test node type (uncustomized) shows up.
     $this->drupalGet('node/add');
-    $this->assertText('poll', t('poll type is found on node/add'));
+    $this->assertText('test', t('Test type is found on node/add'));
 
-    // Customize poll description.
+    // Customize book description.
     $description = $this->randomName();
     $edit = array('description' => $description);
-    $this->drupalPost('admin/structure/types/manage/poll', $edit, t('Save content type'));
+    $this->drupalPost('admin/structure/types/manage/test', $edit, t('Save content type'));
 
-    // Check that poll node type customization shows up.
+    // Check that Test node type customization shows up.
     $this->drupalGet('node/add');
     $this->assertText($description, t('Customized description found'));
 
-    // Disable poll and check that the node type gets disabled.
-    $this->drupalPost('admin/modules', $poll_disable, t('Save configuration'));
-    $disabled = db_query('SELECT disabled FROM {node_type} WHERE type = :type', array(':type' => 'poll'))->fetchField();
-    $this->assertEqual($disabled, 1, t('Poll node type is disabled'));
+    // Disable test node module and check that the node type gets disabled.
+    module_disable(array('node_test'), FALSE);
+    node_types_rebuild();
+    $disabled = db_query('SELECT disabled FROM {node_type} WHERE type = :type', array(':type' => 'test'))->fetchField();
+    $this->assertEqual($disabled, 1, t('Test node type is disabled'));
     $this->drupalGet('node/add');
-    $this->assertNoText('poll', t('poll type is not found on node/add'));
+    $this->assertNoText('book', t('Test node type is not found on node/add'));
 
-    // Reenable poll and check that the customization survived the module
-    // disable.
-    $this->drupalPost('admin/modules', $poll_enable, t('Save configuration'));
-    $disabled = db_query('SELECT disabled FROM {node_type} WHERE type = :type', array(':type' => 'poll'))->fetchField();
-    $this->assertNotIdentical($disabled, FALSE, t('Poll node type found in the database'));
-    $this->assertEqual($disabled, 0, t('Poll node type is not disabled'));
+    // Reenable the test node module and check that the customization survived
+    // the module disable.
+    module_enable(array('node_test'), FALSE);
+    node_types_rebuild();
+    $disabled = db_query('SELECT disabled FROM {node_type} WHERE type = :type', array(':type' => 'test'))->fetchField();
+    $this->assertEqual($disabled, 0, t('Test node type is not disabled'));
     $this->drupalGet('node/add');
     $this->assertText($description, t('Customized description found'));
 
-    // Disable and uninstall poll.
-    $this->drupalPost('admin/modules', $poll_disable, t('Save configuration'));
-    $edit = array('uninstall[poll]' => 'poll');
-    $this->drupalPost('admin/modules/uninstall', $edit, t('Uninstall'));
-    $this->drupalPost(NULL, array(), t('Uninstall'));
-    $disabled = db_query('SELECT disabled FROM {node_type} WHERE type = :type', array(':type' => 'poll'))->fetchField();
-    $this->assertTrue($disabled, t('Poll node type is in the database and is disabled'));
+    // Disable and uninstall book.
+    module_disable(array('node_test'), FALSE);
+    node_types_rebuild();
+    $result = drupal_uninstall_modules(array('node_test'));
+    $disabled = db_query('SELECT disabled FROM {node_type} WHERE type = :type', array(':type' => 'test'))->fetchField();
+    $this->assertTrue($disabled, t('Test node type is in the database and is disabled'));
     $this->drupalGet('node/add');
-    $this->assertNoText('poll', t('poll type is no longer found on node/add'));
+    $this->assertNoText('test', t('Test type is no longer found on node/add'));
 
-    // Reenable poll and check that the customization survived the module
-    // uninstall.
-    $this->drupalPost('admin/modules', $poll_enable, t('Save configuration'));
+    // Reenable the test node module and check that the customization survived
+    // the module uninstall.
+    module_enable(array('node_test'), FALSE);
+    node_types_rebuild();
     $this->drupalGet('node/add');
     $this->assertText($description, t('Customized description is found even after uninstall and reenable.'));
   }
@@ -1504,14 +1349,6 @@ class NodeTypePersistenceTestCase extends DrupalWebTestCase {
  * Rebuild the node_access table.
  */
 class NodeAccessRebuildTestCase extends DrupalWebTestCase {
-  public static function getInfo() {
-    return array(
-      'name' => 'Node access rebuild',
-      'description' => 'Ensures that node access rebuild functions work correctly.',
-      'group' => 'Node',
-    );
-  }
-
   function setUp() {
     parent::setUp();
 
@@ -1532,14 +1369,6 @@ class NodeAccessRebuildTestCase extends DrupalWebTestCase {
  * Test node administration page functionality.
  */
 class NodeAdminTestCase extends DrupalWebTestCase {
-  public static function getInfo() {
-    return array(
-      'name' => 'Node administration',
-      'description' => 'Test node administration page functionality.',
-      'group' => 'Node',
-    );
-  }
-
   function setUp() {
     parent::setUp();
 
@@ -1699,14 +1528,6 @@ class NodeAdminTestCase extends DrupalWebTestCase {
 class NodeTitleTestCase extends DrupalWebTestCase {
   protected $admin_user;
 
-  public static function getInfo() {
-    return array(
-      'name' => 'Node title',
-      'description' => 'Test node title.',
-      'group' => 'Node'
-    );
-  }
-
   function setUp() {
     parent::setUp();
     $this->admin_user = $this->drupalCreateUser(array('administer nodes', 'create article content', 'create page content'));
@@ -1748,14 +1569,6 @@ class NodeTitleTestCase extends DrupalWebTestCase {
  * Test the node_feed() functionality.
  */
 class NodeFeedTestCase extends DrupalWebTestCase {
-  public static function getInfo() {
-    return array(
-      'name' => 'Node feed',
-      'description' => 'Ensures that node_feed() functions correctly.',
-      'group' => 'Node',
-   );
-  }
-
   /**
    * Ensure that node_feed accepts and prints extra channel elements.
    */
@@ -1772,14 +1585,6 @@ class NodeFeedTestCase extends DrupalWebTestCase {
  * Functional tests for the node module blocks.
  */
 class NodeBlockFunctionalTest extends DrupalWebTestCase {
-  public static function getInfo() {
-    return array(
-      'name' => 'Node blocks',
-      'description' => 'Test node block functionality.',
-      'group' => 'Node',
-    );
-  }
-
   function setUp() {
     parent::setUp('node', 'block');
 
@@ -1904,56 +1709,11 @@ class NodeBlockFunctionalTest extends DrupalWebTestCase {
     $this->assertFalse($bid, t('Custom block was deleted.'));
   }
 }
-/**
- * Test multistep node forms basic options.
- */
-class MultiStepNodeFormBasicOptionsTest extends DrupalWebTestCase {
-  public static function getInfo() {
-    return array(
-      'name' => 'Multistep node form basic options',
-      'description' => 'Test the persistence of basic options through multiple steps.',
-      'group' => 'Node',
-    );
-  }
-
-  function setUp() {
-    parent::setUp('poll');
-    $web_user = $this->drupalCreateUser(array('administer nodes', 'create poll content'));
-    $this->drupalLogin($web_user);
-  }
-
-  /**
-   * Change the default values of basic options to ensure they persist.
-   */
-  function testMultiStepNodeFormBasicOptions() {
-    $edit = array(
-      'title' => 'a',
-      'status' => FALSE,
-      'promote' => FALSE,
-      'sticky' => 1,
-      'choice[new:0][chtext]' => 'a',
-      'choice[new:1][chtext]' => 'a',
-    );
-    $this->drupalPost('node/add/poll', $edit, t('Add another choice'));
-    $this->assertNoFieldChecked('edit-status', 'status stayed unchecked');
-    $this->assertNoFieldChecked('edit-promote', 'promote stayed unchecked');
-    $this->assertFieldChecked('edit-sticky', 'sticky stayed checked');
-  }
-}
 
 /**
  * Test to ensure that a node's content is always rebuilt.
  */
 class NodeBuildContent extends DrupalWebTestCase {
-
-  public static function getInfo() {
-    return array(
-      'name' => 'Rebuild content',
-      'description' => 'Test the rebuilding of content for different build modes.',
-      'group' => 'Node',
-    );
-  }
-
  /**
   * Test to ensure that a node's content array is rebuilt on every call to node_build_content().
   */
@@ -1973,15 +1733,6 @@ class NodeBuildContent extends DrupalWebTestCase {
  * Tests node_query_node_access_alter().
  */
 class NodeQueryAlter extends DrupalWebTestCase {
-
-  public static function getInfo() {
-    return array(
-      'name' => 'Node query alter',
-      'description' => 'Test that node access queries are properly altered by the node module.',
-      'group' => 'Node',
-    );
-  }
-
   /**
    * User with permission to view content.
    */
@@ -2164,15 +1915,6 @@ class NodeQueryAlter extends DrupalWebTestCase {
  * Tests node_query_entity_field_access_alter().
  */
 class NodeEntityFieldQueryAlter extends DrupalWebTestCase {
-
-  public static function getInfo() {
-    return array(
-      'name' => 'Node entity query alter',
-      'description' => 'Test that node access entity queries are properly altered by the node module.',
-      'group' => 'Node',
-    );
-  }
-
   /**
    * User with permission to view content.
    */
@@ -2228,14 +1970,6 @@ class NodeEntityFieldQueryAlter extends DrupalWebTestCase {
  * Test node token replacement in strings.
  */
 class NodeTokenReplaceTestCase extends DrupalWebTestCase {
-  public static function getInfo() {
-    return array(
-      'name' => 'Node token replacement',
-      'description' => 'Generates text using placeholders for dummy content to check node token replacement.',
-      'group' => 'Node',
-    );
-  }
-
   /**
    * Creates a node, then tests the tokens generated from it.
    */
@@ -2298,5 +2032,96 @@ class NodeTokenReplaceTestCase extends DrupalWebTestCase {
       $output = token_replace($input, array('node' => $node), array('language' => $language_interface, 'sanitize' => FALSE));
       $this->assertEqual($output, $expected, t('Unsanitized node token %token replaced.', array('%token' => $input)));
     }
+  }
+}
+
+/**
+ * Tests user permissions for node revisions.
+ */
+class NodeRevisionPermissionsTestCase extends DrupalWebTestCase {
+  protected $node_revisions = array();
+  protected $accounts = array();
+
+  // Map revision permission names to node revision access ops.
+  protected $map = array(
+    'view' => 'view revisions',
+    'update' => 'revert revisions',
+    'delete' => 'delete revisions',
+  );
+
+  function setUp() {
+    parent::setUp();
+
+    // Create a node with several revisions.
+    $node = $this->drupalCreateNode();
+    $this->node_revisions[] = $node;
+
+    for ($i = 0; $i < 3; $i++) {
+      // Create a revision for the same nid and settings with a random log.
+      $revision = clone $node;
+      $revision->revision = 1;
+      $revision->log = $this->randomName(32);
+      node_save($revision);
+      $this->node_revisions[] = $revision;
+    }
+
+    // Create three users, one with each revision permission.
+    foreach ($this->map as $op => $permission) {
+      // Create the user.
+      $account = $this->drupalCreateUser(
+        array(
+          'access content',
+          'edit any page content',
+          'delete any page content',
+          $permission,
+        )
+      );
+      $account->op = $op;
+      $this->accounts[] = $account;
+    }
+
+    // Create an admin account (returns TRUE for all revision permissions).
+    $admin_account = $this->drupalCreateUser(array('access content', 'administer nodes'));
+    $admin_account->is_admin = TRUE;
+    $this->accounts['admin'] = $admin_account;
+
+    // Create a normal account (returns FALSE for all revision permissions).
+    $normal_account = $this->drupalCreateUser();
+    $normal_account->op = FALSE;
+    $this->accounts[] = $normal_account;
+  }
+
+  /**
+   * Tests the _node_revision_access() function.
+   */
+  function testNodeRevisionAccess() {
+    $revision = $this->node_revisions[1];
+
+    $parameters = array(
+      'op' => array_keys($this->map),
+      'account' => $this->accounts,
+    );
+
+    $permutations = $this->generatePermutations($parameters);
+    foreach ($permutations as $case) {
+      if (!empty($case['account']->is_admin) || $case['op'] == $case['account']->op) {
+        $this->assertTrue(_node_revision_access($revision, $case['op'], $case['account']), "{$this->map[$case['op']]} granted.");
+      }
+      else {
+        $this->assertFalse(_node_revision_access($revision, $case['op'], $case['account']), "{$this->map[$case['op']]} not granted.");
+      }
+    }
+
+    // Test that access is FALSE for a node administrator with an invalid $node
+    // or $op parameters.
+    $admin_account = $this->accounts['admin'];
+    $this->assertFalse(_node_revision_access(FALSE, 'view', $admin_account), '_node_revision_access() returns FALSE with an invalid node.');
+    $this->assertFalse(_node_revision_access($revision, 'invalid-op', $admin_account), '_node_revision_access() returns FALSE with an invalid op.');
+
+    // Test that the $account parameter defaults to the "logged in" user.
+    $original_user = $GLOBALS['user'];
+    $GLOBALS['user'] = $admin_account;
+    $this->assertTrue(_node_revision_access($revision, 'view'), '_node_revision_access() returns TRUE when used with global user.');
+    $GLOBALS['user'] = $original_user;
   }
 }

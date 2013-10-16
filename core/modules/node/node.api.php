@@ -19,13 +19,10 @@
  * node operation:
  * - Node-type-specific hooks: These hooks are only invoked on the primary
  *   module, using the "base" return component of hook_node_info() as the
- *   function prefix.  For example, poll.module defines the base for the Poll
- *   content type as "poll", so during creation of a poll node, hook_insert() is
- *   only invoked by calling poll_insert().
+ *   function prefix.
  * - All-module hooks: This set of hooks is invoked on all implementing
  *   modules, to allow other modules to modify what the primary node module is
- *   doing. For example, hook_node_insert() is invoked on all modules when
- *   creating a poll node.
+ *   doing.
  * - Field hooks: Hooks related to the fields attached to the node. These are
  *   invoked from the field operations functions described below, and can be
  *   either field-type-specific or all-module hooks.
@@ -811,7 +808,6 @@ function hook_node_submit($node, $form, &$form_state) {
  * @param $langcode
  *   The language code used for rendering.
  *
- * @see forum_node_view()
  * @see comment_node_view()
  * @see hook_entity_view()
  *
@@ -858,10 +854,9 @@ function hook_node_view_alter(&$build) {
 /**
  * Define module-provided node types.
  *
- * This hook allows a module to define one or more of its own node types. For
- * example, the forum module uses it to define a forum node-type named "Forum
- * topic." The name and attributes of each desired node type are specified in
- * an array returned by the hook.
+ * This hook allows a module to define one or more of its own node types. The
+ * name and attributes of each desired node type are specified in an array
+ * returned by the hook.
  *
  * Only module-provided node types should be defined through this hook. User-
  * provided (or 'custom') node types should be defined only in the 'node_type'
@@ -902,10 +897,10 @@ function hook_node_view_alter(&$build) {
  */
 function hook_node_info() {
   return array(
-    'forum' => array(
-      'name' => t('Forum topic'),
-      'base' => 'forum',
-      'description' => t('A <em>forum topic</em> starts a new discussion thread within a forum.'),
+    'blog' => array(
+      'name' => t('Blog post'),
+      'base' => 'blog',
+      'description' => t('A <em>Blog post</em> is a discussion starter.'),
       'title_label' => t('Subject'),
     )
   );

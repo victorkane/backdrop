@@ -789,9 +789,6 @@ function system_modules($form, $form_state = array()) {
   $modules = array();
   $form['modules'] = array('#tree' => TRUE);
 
-  // Used when checking if module implements a help page.
-  $help_arg = module_exists('help') ? drupal_help_arg() : FALSE;
-
   // Used when displaying modules that are required by the install profile.
   require_once DRUPAL_ROOT . '/core/includes/install.inc';
   $distribution_name = check_plain(drupal_install_profile_distribution_name());
@@ -836,17 +833,6 @@ function system_modules($form, $form_state = array()) {
         else {
           $extra['requires'][$requires] = t('@module (<span class="admin-disabled">disabled</span>)', array('@module' => $requires_name));
         }
-      }
-    }
-    // Generate link for module's help page, if there is one.
-    if ($help_arg && $module->status && in_array($filename, module_implements('help'))) {
-      if (module_invoke($filename, 'help', "admin/help#$filename", $help_arg)) {
-        $extra['links']['help'] = array(
-          '#type' => 'link',
-          '#title' => t('Help'),
-          '#href' => "admin/help/$filename",
-          '#options' => array('attributes' => array('class' =>  array('module-link', 'module-link-help'), 'title' => t('Help'))),
-        );
       }
     }
     // Generate link for module's permission, if the user has access to it.
@@ -1373,7 +1359,7 @@ function system_site_information_settings() {
     '#description' => t("How this is used depends on your site's theme."),
   );
   $form['site_information']['site_mail'] = array(
-    '#type' => 'textfield',
+    '#type' => 'email',
     '#title' => t('E-mail address'),
     '#default_value' => variable_get('site_mail', ini_get('sendmail_from')),
     '#description' => t("The <em>From</em> address in automated e-mails sent during registration and new password requests, and other notifications. (Use an address ending in your site's domain to help prevent this e-mail being flagged as spam.)"),
@@ -1428,10 +1414,6 @@ function system_site_information_settings() {
  * Validates the submitted site-information form.
  */
 function system_site_information_settings_validate($form, &$form_state) {
-  // Validate the e-mail address.
-  if ($error = user_validate_mail($form_state['values']['site_mail'])) {
-    form_set_error('site_mail', $error);
-  }
   // Check for empty front page path.
   if (empty($form_state['values']['site_frontpage'])) {
     // Set to default "user".

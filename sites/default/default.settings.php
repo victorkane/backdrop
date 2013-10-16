@@ -136,7 +136,6 @@
  *     'users'     => 'shared_',
  *     'sessions'  => 'shared_',
  *     'role'      => 'shared_',
- *     'authmap'   => 'shared_',
  *   ),
  * @endcode
  * You can also use a reference to a schema/database as a prefix. This maybe
@@ -150,7 +149,6 @@
  *     'users'     => 'shared.',
  *     'sessions'  => 'shared.',
  *     'role'      => 'shared.',
- *     'authmap'   => 'shared.',
  *   );
  * @endcode
  * NOTE: MySQL and SQLite's definition of a schema is a database.
@@ -354,7 +352,7 @@ ini_set('session.cookie_lifetime', 2000000);
  * security, or encryption benefits. In an environment where Drupal
  * is behind a reverse proxy, the real IP address of the client should
  * be determined such that the correct client IP address is available
- * to Drupal's logging, statistics, and access management systems. In
+ * to Drupal's logging and access management systems. In
  * the most simple scenario, the proxy server will add an
  * X-Forwarded-For header to the request that contains the client IP
  * address. However, HTTP headers are vulnerable to spoofing, where a
