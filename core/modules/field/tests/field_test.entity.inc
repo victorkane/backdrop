@@ -474,21 +474,3 @@ function field_test_entity_nested_form_submit($form, &$form_state) {
 
   drupal_set_message(t('test_entities @id_1 and @id_2 have been updated.', array('@id_1' => $entity_1->ftid, '@id_2' => $entity_2->ftid)));
 }
-
-/**
- * Controller class for the test_entity_bundle entity type.
- *
- * This extends the DrupalDefaultEntityController class, adding required
- * special handling for bundles (since they are not stored in the database).
- */
-class TestEntityBundleController extends DrupalDefaultEntityController {
-
-  protected function attachLoad(&$entities, $revision_id = FALSE) {
-    // Add bundle information.
-    foreach ($entities as $key => $entity) {
-      $entity->fttype = 'test_entity_bundle';
-      $entities[$key] = $entity;
-    }
-    parent::attachLoad($entities, $revision_id);
-  }
-}

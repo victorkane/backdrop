@@ -261,3 +261,9 @@ function field_test_field_widget_form_alter(&$element, &$form_state, $context) {
       break;
   }
 }
+
+function field_test_autoload_info() {
+  return array(
+    'TestEntityBundleController' => 'field_test.controller.inc',
+  );
+}
