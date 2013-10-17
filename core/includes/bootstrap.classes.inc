@@ -97,13 +97,13 @@ function backdrop_class_list() {
     'DatabaseSchema_sqlite' => $path . 'database/sqlite/schema.inc',
     'SelectQuery_sqlite' => $path . 'database/sqlite/select.inc',
 
-    'FileTransfer' => $path . 'filetransfer.inc',
-    'FileTransferException' => $path . 'filetransfer.inc',
-    'SkipDotsRecursiveDirectoryIterator' => $path . 'filetransfer.inc',
-    'FileTransferChmodInterface' => $path . 'filetransfer.inc',
-    'FileTransferFTP' => $path . 'ftp.inc',
-    'FileTransferFTPExtension' => $path . 'ftp.inc',
-    'FileTransferLocal' => $path . 'local.inc',
-    'FileTransferSSH' => $path . 'ssh.inc',
+    'FileTransfer' => $path . 'filetransfer/filetransfer.inc',
+    'FileTransferException' => $path . 'filetransfer/filetransfer.inc',
+    'SkipDotsRecursiveDirectoryIterator' => $path . 'filetransfer/filetransfer.inc',
+    'FileTransferChmodInterface' => $path . 'filetransfer/filetransfer.inc',
+    'FileTransferFTP' => $path . 'filetransfer/ftp.inc',
+    'FileTransferFTPExtension' => $path . 'filetransfer/ftp.inc',
+    'FileTransferLocal' => $path . 'filetransfer/local.inc',
+    'FileTransferSSH' => $path . 'filetransfer/ssh.inc',
   );
 }
