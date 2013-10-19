@@ -266,7 +266,7 @@ function _update_create_fetch_task($project) {
 function _update_build_fetch_url($project, $site_key = '') {
   $name = $project['name'];
   $url = _update_get_fetch_url_base($project);
-  $url .= '/' . $name . '/' . DRUPAL_CORE_COMPATIBILITY;
+  $url .= '/' . $name . '/' . BACKDROP_CORE_COMPATIBILITY;
   // Only append a site_key and the version information if we have a site_key
   // in the first place, and if this is not a disabled module or theme. We do
   // not want to record usage statistics for disabled code.
