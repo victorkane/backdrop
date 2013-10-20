@@ -29,7 +29,16 @@ else {
 
 // Bootstrap to perform initial validation or other operations.
 drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
-if (!module_exists('simpletest')) {
+if ($args['force']) {
+  if (module_exists('simpletest')) {
+    echo "Simpletest already installed.\n";
+  }
+  else {
+    module_enable(array('simpletest'));
+    echo "Simpletest module enabled.\n";
+  }
+}
+elseif (!module_exists('simpletest')) {
   simpletest_script_print_error("The simpletest module must be enabled before this script can run.");
   exit(1);
 }
@@ -138,6 +147,8 @@ All arguments are long options.
 
               Run tests in parallel, up to [num] tests at a time.
 
+  --force     Enable the Simpletest module if it's not enabled already.
+
   --all       Run all available tests.
 
   --class     Run tests identified by specific class names, instead of group names.
@@ -191,6 +202,7 @@ function simpletest_script_parse_args() {
     'url' => '',
     'php' => '',
     'concurrency' => 1,
+    'force' => FALSE,
     'all' => FALSE,
     'class' => FALSE,
     'file' => FALSE,
